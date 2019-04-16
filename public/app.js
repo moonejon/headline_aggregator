@@ -1,5 +1,3 @@
-// Grab the articles as a json
-
 $(document).ready(function () {
 
   initiatePage();
@@ -39,7 +37,6 @@ $(document).on("click", ".article", function() {
       $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Submit Comment</button>");
 
       if (data.note) {
-        console.log(data);
             $("#notes").append(
                 "<div class='row'> <div class='card'> <div class='card-body'> <h5 class='card-title'>" +
                     data.note.title +
@@ -48,6 +45,9 @@ $(document).on("click", ".article", function() {
                     "</p> </div> </div>  </div>"
             );
       }
+      // TODO: Once the one-to-many relationship is established in the database, this should be edited slightly to iterate over an array of notes and append those to the page.
+      // A delete button would actually make sense once that is working, so that should be added too and a route to delete the comment should be written in server.js, 
+      // which would be wired up to a button with an onclick function that deletes the comment based on its unique ID
     });
 });
 
