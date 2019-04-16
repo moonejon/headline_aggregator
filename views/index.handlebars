@@ -1,56 +1,43 @@
-<div id="home">
-  {{>ideas/header}}
-        <div class="jumbotron jumbotron-fluid">
-          <div class="container">
-            <h1 id="jumbotron-text" class="display-4 text-center">Big Ideas</h1>
-            <p class="lead text-center">Submit your coolest ideas!</p>
-            <button id="newIdea" class="btn btn-primary center" data-toggle="modal" data-target="#new-idea-modal">New Idea</button>
-          </div>
-        </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="new-idea-modal" tabindex="-1" role="dialog" aria-labelledby="new-idea-modal-title"
-          aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 id="new-idea-modal-header">Idea Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form class="clearfix mb-4" action="POST">
-                  <div class="form-group">
-                    <label for="new-idea-name">Name</label>
-                    <input type="text" id="new-idea-name" class="form-control" aria-describedby="new-idea-name"
-                      placeholder="Enter Name">
-                  </div>
-                  <div class="form-group">
-                    <label for="new-idea-description">Description</label>
-                    <textarea class="form-control" id="new-idea-description" aria-describedby="new-idea-description"
-                      placeholder="Enter Description"></textarea>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                  <button id="submit" class="btn btn-primary float-right" data-dismiss="modal">Submit</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        
-        <div id="idea-list" class="list-group, grid">
-          {{#each projects}}
-          {{> ideas/idea-card}}
-          {{/each}}
-        </div>
-
-      </div>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Scraping With Mongoose</title>
+    <style>
+      body { background-color: #white }
+      #articles {
+        display: inline-block;
+        overflow: auto;
+        width: 60%;
+        height: 700px;
+      }
+      #notes {
+        float: right;
+        width: 30%;
+      }
+      textarea, input {
+        display: block;
+        width: 100%;
+        background-color: #FCF5C7;
+      }
+      input {
+        height: 36px;
+        font-size: 24px;
+      }
+      textarea {
+        height: 200px;
+        font-size: 18px;
+      }
+    </style>
+    
+  </head>
+  <body>
+    <div id="wrapper">
+      {{> ideas/header}}
+      <div id="articles"></div>
+      <div id="notes"></div>
     </div>
-  </div>
-</div>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
