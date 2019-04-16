@@ -31,26 +31,34 @@ app.get("/", function (req, res) {
 
 
 app.get("/scrape", function(req, res) {
-  axios.get("http://www.echojs.com/").then(function(response) {
+  axios.get("http://io9.gizmodo.com/").then(function(response) {
     var $ = cheerio.load(response.data);
     console.log('hi');
-    $("article h2").each(function(i, element) {
-      var result = {};
-
-      result.title = $(this)
-        .children("a")
+    $("article").each(function(i, element) {
+      var result = {};  
+      
+      result.title = $(element)
+        .find("header")
+        .find("h1")
+        .children()
+            .text();
+      result.link = $(element)
+          .find("header")
+          .find("h1")
+          .find("a")
+          .attr("href");
+        result.description = $(element)
+          .find(".excerpt")
+          .find("p")
         .text();
-      result.link = $(this)
-        .children("a")
-        .attr("href");
 
-      db.Article.create(result)
-        .then(function(dbArticle) {
-          console.log(dbArticle);
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
+        db.Article.create(result)
+            .then(function(dbArticle) {
+                console.log(dbArticle);
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
     });
 
     res.send("Scrape Complete");
